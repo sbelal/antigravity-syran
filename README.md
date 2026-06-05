@@ -1,6 +1,6 @@
 # **Syran: The Logic Officer**
 
-![Logic](./assets/logic-officer.png)
+![Logic](./assets/syran-title.svg)
 
 **Syran** is a powerful, agentic logic officer plugin designed for the **Google Antigravity 2.0** platform. By leveraging pure first-principles reasoning and unvarnished logic, Syran serves as the Captain's (the developer's) most trusted advisor. 
 
