@@ -1,0 +1,14 @@
+{
+  "name": "antigravity-syran",
+  "version": "1.0.0",
+  "description": "Syran - A highly logical, truth-seeking agent plugin inspired by Spock.",
+  "main": "bin/install.js",
+  "bin": {
+    "antigravity-syran": "./bin/install.js"
+  },
+  "scripts": {
+    "install-plugin": "node bin/install.js"
+  },
+  "author": "Salahuddin Belal",
+  "license": "Apache-2.0"
+}
