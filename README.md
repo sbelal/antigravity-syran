@@ -58,7 +58,7 @@ Syran comes with a zero-dependency installer that can be run instantly via `npx`
 
 ```bash
 # Run the interactive installer
-npx antigravity-syran
+npx git+https://github.com/sbelal/antigravity-syran.git
 ```
 
 When prompt, select an option from the menu:
