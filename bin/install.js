@@ -4,6 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 
+// Workflows to deploy separately
+const WORKFLOW_NAMES = ['commit.md', 'onboard.md', 'pr.md', 'review.md'];
+
 function copyDir(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
   const entries = fs.readdirSync(src, { withFileTypes: true });
@@ -15,31 +18,6 @@ function copyDir(src, dest) {
     } else {
       fs.copyFileSync(srcPath, destPath);
     }
-  }
-}
-
-function install(targetDir, name) {
-  console.log(`Installing Syran plugin to ${targetDir}...`);
-  try {
-    // Determine source directory (template subfolder)
-    const srcRoot = path.join(__dirname, '..', 'template');
-    
-    if (!fs.existsSync(srcRoot)) {
-      throw new Error(`Template directory not found at ${srcRoot}`);
-    }
-
-    // Ensure clean install
-    if (fs.existsSync(targetDir)) {
-      console.log(`Target directory already exists. Removing older installation...`);
-      fs.rmSync(targetDir, { recursive: true, force: true });
-    }
-    
-    copyDir(srcRoot, targetDir);
-    
-    console.log(`\n\x1b[32mSuccess: Syran plugin installed ${name} successfully!\x1b[0m`);
-    console.log(`Please reload/restart the Antigravity agent to load the new plugin.`);
-  } catch (error) {
-    console.error(`\n\x1b[31mError during installation: ${error.message}\x1b[0m`);
   }
 }
 
@@ -58,27 +36,86 @@ function removeEmptyDir(dir) {
   return false;
 }
 
-function uninstall(targetDir, name) {
-  console.log(`Uninstalling Syran plugin from ${targetDir}...`);
+function install(targetDir, workflowsDir, name) {
+  console.log(`Installing Syran plugin to ${targetDir}...`);
   try {
+    const srcRoot = path.join(__dirname, '..', 'template');
+    
+    if (!fs.existsSync(srcRoot)) {
+      throw new Error(`Template directory not found at ${srcRoot}`);
+    }
+
+    // Ensure clean main plugin directory install
     if (fs.existsSync(targetDir)) {
+      console.log(`Target directory already exists. Removing older installation...`);
       fs.rmSync(targetDir, { recursive: true, force: true });
-      console.log(`\n\x1b[32mSuccess: Syran plugin uninstalled ${name} successfully!\x1b[0m`);
+    }
+    
+    // Copy main plugin template
+    copyDir(srcRoot, targetDir);
+
+    // Deploy workflows separately to the parsed workflows folder
+    if (workflowsDir) {
+      console.log(`Deploying workflows to ${workflowsDir}...`);
+      fs.mkdirSync(workflowsDir, { recursive: true });
+      const srcWorkflowsDir = path.join(srcRoot, 'workflows');
       
-      // If uninstalled locally, clean up empty parent directories (.agents/plugins and .agents)
-      if (name === 'locally') {
-        const pluginsDir = path.dirname(targetDir);
-        const agentsDir = path.dirname(pluginsDir);
-        
-        if (removeEmptyDir(pluginsDir)) {
-          console.log(`Removed empty directory: ${pluginsDir}`);
-          if (removeEmptyDir(agentsDir)) {
-            console.log(`Removed empty directory: ${agentsDir}`);
-          }
+      for (const file of WORKFLOW_NAMES) {
+        const srcFile = path.join(srcWorkflowsDir, file);
+        const destFile = path.join(workflowsDir, file);
+        if (fs.existsSync(srcFile)) {
+          fs.copyFileSync(srcFile, destFile);
         }
       }
-    } else {
-      console.log(`Syran plugin is not installed ${name}.`);
+    }
+    
+    console.log(`\n\x1b[32mSuccess: Syran plugin installed ${name} successfully!\x1b[0m`);
+    console.log(`Please reload/restart the Antigravity agent to load the new plugin.`);
+  } catch (error) {
+    console.error(`\n\x1b[31mError during installation: ${error.message}\x1b[0m`);
+  }
+}
+
+function uninstall(targetDir, workflowsDir, name) {
+  console.log(`Uninstalling Syran plugin from ${targetDir}...`);
+  try {
+    // 1. Remove main plugin directory
+    if (fs.existsSync(targetDir)) {
+      fs.rmSync(targetDir, { recursive: true, force: true });
+      console.log(`Removed plugin directory: ${targetDir}`);
+    }
+
+    // 2. Remove specific workflow files
+    if (workflowsDir && fs.existsSync(workflowsDir)) {
+      for (const file of WORKFLOW_NAMES) {
+        const destFile = path.join(workflowsDir, file);
+        if (fs.existsSync(destFile)) {
+          fs.rmSync(destFile, { force: true });
+          console.log(`Removed workflow file: ${destFile}`);
+        }
+      }
+      if (name === 'globally') {
+        if (removeEmptyDir(workflowsDir)) {
+          console.log(`Removed empty global_workflows directory: ${workflowsDir}`);
+        }
+      }
+    }
+
+    console.log(`\n\x1b[32mSuccess: Syran plugin uninstalled ${name} successfully!\x1b[0m`);
+
+    // 3. Clean up empty parent directories (local only)
+    if (name === 'locally') {
+      const pluginsDir = path.dirname(targetDir); // <workspace>/.agents/plugins
+      const agentsDir = path.dirname(pluginsDir);  // <workspace>/.agents
+      
+      removeEmptyDir(workflowsDir); // Clean up workflows dir if empty
+      
+      if (removeEmptyDir(pluginsDir)) {
+        console.log(`Removed empty directory: ${pluginsDir}`);
+        if (removeEmptyDir(agentsDir)) {
+          console.log(`Removed empty directory: ${agentsDir}`);
+        }
+      }
     }
   } catch (error) {
     console.error(`\n\x1b[31mError during uninstallation: ${error.message}\x1b[0m`);
@@ -88,9 +125,11 @@ function uninstall(targetDir, name) {
 // Resolve paths
 const currentWorkspace = process.cwd();
 const localTarget = path.join(currentWorkspace, '.agents', 'plugins', 'syran');
+const localWorkflowsTarget = path.join(currentWorkspace, '.agents', 'workflows');
 
 const homeDir = process.env.USERPROFILE || process.env.HOME || '';
 const globalTarget = homeDir ? path.join(homeDir, '.gemini', 'config', 'plugins', 'syran') : '';
+const globalWorkflowsTarget = homeDir ? path.join(homeDir, '.gemini', 'config', 'global_workflows') : '';
 
 // Main CLI menu
 const rl = readline.createInterface({
@@ -113,26 +152,26 @@ function showMenu() {
     const choice = answer.trim();
     switch (choice) {
       case '1':
-        install(localTarget, 'locally');
+        install(localTarget, localWorkflowsTarget, 'locally');
         rl.close();
         break;
       case '2':
-        if (!globalTarget) {
-          console.error('\x1b[31mError: Could not resolve home directory for global installation.\x1b[0m');
+        if (!globalTarget || !globalWorkflowsTarget) {
+          console.error('\x1b[31mError: Could not resolve home directory paths for global installation.\x1b[0m');
         } else {
-          install(globalTarget, 'globally');
+          install(globalTarget, globalWorkflowsTarget, 'globally');
         }
         rl.close();
         break;
       case '3':
-        uninstall(localTarget, 'locally');
+        uninstall(localTarget, localWorkflowsTarget, 'locally');
         rl.close();
         break;
       case '4':
-        if (!globalTarget) {
-          console.error('\x1b[31mError: Could not resolve home directory for global uninstallation.\x1b[0m');
+        if (!globalTarget || !globalWorkflowsTarget) {
+          console.error('\x1b[31mError: Could not resolve home directory paths for global uninstallation.\x1b[0m');
         } else {
-          uninstall(globalTarget, 'globally');
+          uninstall(globalTarget, globalWorkflowsTarget, 'globally');
         }
         rl.close();
         break;
