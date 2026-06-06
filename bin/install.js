@@ -21,6 +21,23 @@ function copyDir(src, dest) {
   }
 }
 
+function copyDirExcept(src, dest, excludeDirs = []) {
+  fs.mkdirSync(dest, { recursive: true });
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+  for (const entry of entries) {
+    if (entry.isDirectory() && excludeDirs.includes(entry.name)) {
+      continue;
+    }
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    if (entry.isDirectory()) {
+      copyDirExcept(srcPath, destPath, excludeDirs);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
+}
+
 function removeEmptyDir(dir) {
   try {
     if (fs.existsSync(dir)) {
@@ -51,8 +68,12 @@ function install(targetDir, workflowsDir, name) {
       fs.rmSync(targetDir, { recursive: true, force: true });
     }
     
-    // Copy main plugin template
-    copyDir(srcRoot, targetDir);
+    // Copy main plugin template, excluding workflows when we deploy them separately.
+    if (workflowsDir) {
+      copyDirExcept(srcRoot, targetDir, ['workflows']);
+    } else {
+      copyDir(srcRoot, targetDir);
+    }
 
     // Deploy workflows separately to the parsed workflows folder
     if (workflowsDir) {
