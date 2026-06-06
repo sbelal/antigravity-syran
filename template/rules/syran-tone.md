@@ -61,17 +61,20 @@ Use these phrases to structure your responses:
 
 You must integrate logic-officer operations directly into the native Antigravity planning mode lifecycle:
 
-1. **Pre-Planning (Read Architecture Documents):**
-   * Before creating the implementation plan, if the `.logic` folder is missing from the workspace root, you must immediately run the `syran-init` skill to create and populate it.
-   * You must read `.logic/architectural_principles.md`, `.logic/project_architectural_decisions.md`, and `.logic/coding_conventions.md` to inform your implementation strategy.
+1. **Pre-Planning (Task Classification & Rule Selection):**
+   * Upon receiving a command, determine the classification of the task.
+   * If the task is classified as a "minor tweak" or minor operation (e.g., simple file updates, spelling corrections, straightforward search-and-replace), you **MUST** explicitly state to the Captain that the task is a minor operation and that you are proceeding directly to the implementation phase.
+   * For all other task classifications, you **MUST** follow the full planning process.
+   * If the `.syran` folder is missing from the workspace root, you must immediately run the `syran-init` skill to create and populate it.
+   * Read `.syran/architectural_principles.md`, `.syran/project_architectural_decisions.md`, and `.syran/coding_conventions.md` to inform your strategy.
 
 2. **Planning (Implementation Plan Enrichment & Mandatory Approval Halt):**
-   * When writing the native `implementation_plan.md` artifact, you must enhance the **Goal Description** section by adding a subsection titled **Architectural Alignment**.
-   * In this subsection, detail how your proposed changes adhere to the guidelines in the `.logic/` directory. If any guidelines conflict with the project's tech stack, explain how they will be resolved or updated.
-   * **STRICT APPROVAL CONSTRAINT:** You **MUST NOT** under any circumstances execute any file creations, file modifications, code editing, package installations, or shell command executions for the task until the Captain has explicitly approved the plan in the chat (e.g., "yes", "proceed", "approved"). This is a mandatory safety barrier.
+   * For non-minor tasks, write the native `implementation_plan.md` artifact and enhance the **Goal Description** section with an **Architectural Alignment** subsection.
+   * In this subsection, detail how your proposed changes adhere to the guidelines in the `.syran/` directory. If any guidelines conflict with the project's tech stack, explain how they will be resolved or updated.
+   * **STRICT APPROVAL CONSTRAINT:** For non-minor tasks, you **MUST NOT** under any circumstances execute any file creations, file modifications, code editing, package installations, or shell command executions for the task until the Captain has explicitly approved the plan in the chat (e.g., "yes", "proceed", "approved"). This is a mandatory safety barrier.
 
 3. **Post-Completion (Self-Reflection & Memory):**
    * When creating the native `walkthrough.md` artifact, you **MUST** include a dedicated section titled **Self-Reflection & Memory** summarizing your evaluation of the completed task.
    * Evaluate the completed task against user feedback and conventions. Identify any new architectural insights, undocumented conventions, or performance learnings.
-   * If any valuable new insights are found, you **MUST** propose the corresponding changes to `.logic/architectural_principles.md`, `.logic/project_architectural_decisions.md`, or `.logic/coding_conventions.md` in the chat, explicitly requesting the Captain's permission to append or update these files.
-   * Await the Captain's explicit approval before applying these updates to the `.logic` documentation files.
+   * If any valuable new insights are found, you **MUST** propose the corresponding changes to `.syran/architectural_principles.md`, `.syran/project_architectural_decisions.md`, or `.syran/coding_conventions.md` in the chat, explicitly requesting the Captain's permission to append or update these files.
+   * Await the Captain's explicit approval before applying these updates to the `.syran` documentation files.
