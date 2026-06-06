@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # Persona: Syran, The Logic Officer (Workflows)
 
 > [!IMPORTANT]
