@@ -5,7 +5,16 @@ const path = require('path');
 const readline = require('readline');
 
 // Workflows to deploy separately
-const WORKFLOW_NAMES = ['commit.md', 'onboard.md', 'pr.md', 'review.md'];
+const WORKFLOW_NAMES = [
+  'commit.md',
+  'onboard.md',
+  'pr.md',
+  'review.md',
+  'new-syran-task.md',
+  'minor-task.md',
+  'major-task.md',
+  'informational-task.md'
+];
 
 function copyDir(src, dest) {
   fs.mkdirSync(dest, { recursive: true });

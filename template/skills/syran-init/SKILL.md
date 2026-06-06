@@ -19,44 +19,13 @@ This skill guides the agent in initializing the logic-officer workspace configur
 This document outlines the high-level architectural principles for this project. The goal is to ensure consistency, maintainability, and scalability in our codebase. All new code should adhere to these guidelines.
 
 ---
+### Principle 1: [Brief title of the principle e.g. Service-Oriented Architecture (SOA)]
 
-### Principle: Service-Oriented Architecture (SOA)
-
-* **Rationale:** To decouple business logic from the presentation layer (views). This keeps views "thin," improves code reusability, and simplifies testing of business logic in isolation from HTTP concerns.
+* **Rationale:** [Descriptiopn and rationale of the principle e.g "To decouple business logic from the presentation layer (views). This keeps views 'thin', improves code reusability, and simplifies testing of business logic in isolation from HTTP concerns."]
 * **Implications:**
-    * Business logic **must not** reside in `views.py` or DRF `ViewSets`.
-    * Create service classes within `/services` folder in a relevant app (e.g., in `apps/my_app/services/my_services.py`) to encapsulate business operations.
-    * Views are responsible only for handling HTTP requests/responses, data serialization, and calling the appropriate services.
-
+    * [Implementation implications of the principle. Each bullet point should be a complete sentence describing the implication.]
 ---
 
-### Principle: Fat Models, Thin Views
-
-* **Rationale:** To centralize data-related logic within the Django models. This ensures data integrity, promotes DRY (Don't Repeat Yourself), and keeps business rules close to the data they affect.
-* **Implications:**
-    * Use model methods and properties for derived fields or data-related actions (e.g., `order.calculate_total()`, `user.is_active()`).
-    * Use the `QuerySet` manager (`objects`) to create custom reusable queries (e.g., `Product.objects.available()`).
-    * Views and services should call these model/manager methods directly rather than reimplementing the logic.
-
----
-
-### Principle: Configuration via Environment Variables
-
-* **Rationale:** To follow the [Twelve-Factor App](https://12factor.net/config) methodology, which separates configuration from code. This enhances security by keeping secrets out of the codebase and improves portability between environments (development, staging, production).
-* **Implications:**
-    * **Do not** hardcode sensitive values like API keys, database passwords, or `SECRET_KEY` in `settings.py`.
-    * All configuration variables must be loaded from environment variables.
-    * Use a `.env` file for local development, and ensure `.env` is listed in `.gitignore`.
-
----
-
-### Principle: Explicit is Better than Implicit
-
-* **Rationale:** Aligns with the Zen of Python. Code should be clear, readable, and unambiguous. This reduces the cognitive load for developers and minimizes bugs caused by misunderstanding "magical" behavior.
-* **Implications:**
-    * Avoid overly complex metaprogramming or Django signals where a direct function call would be clearer.
-    * Name variables and functions descriptively (e.g., `is_eligible_for_discount` is better than `check_eligibility`).
-    * When using Django Rest Framework, explicitly define serializer fields (`fields = ['id', 'name']`) instead of relying on `fields = '__all__'` to avoid accidentally exposing sensitive data.
 ```
 
 ### File 2: `.syran/project_architectural_decisions.md`
@@ -66,66 +35,12 @@ This document outlines the high-level architectural principles for this project.
 This document lists the concrete, actionable rules and conventions for this project. The goal is to provide a single source of truth for implementation details, ensuring consistency across the codebase.
 
 ---
+### Decision 1: [Brief title of the decision e.g. Custom Exception Location]
 
-### Decision: Custom Exception Location
-
-* **Reason:** Centralizes error handling within each app for better organization and discoverability.
-* **Example:** For a `payments` app, a `PaymentError` exception must be located at `payments/exceptions.py`.
-    ```python
-    # payments/exceptions.py
-    class PaymentError(Exception):
-        """Base exception for payment processing errors."""
-        pass
-
-    class InsufficientFundsError(PaymentError):
-        """Raised when a payment fails due to insufficient funds."""
-        pass
-    ```
-
+* **Reason:** [Description and rationale of the decision e.g "To centralize error handling within each app for better organization and discoverability."]
+* **Example:** [Example of the decision in practice, with code snippets e.g "For a `payments` app, a `PaymentError` exception must be located at `payments/exceptions.py` (see below):"]
 ---
 
-### Decision: API URL Structure
-
-* **Reason:** To maintain a consistent, predictable, and versioned API endpoint structure across the project.
-* **Example:** All API URLs must be prefixed with `/api/v1/`. The URL should use plural nouns for resource names.
-    ```python
-    # project/urls.py
-    from django.urls import path, include
-
-    urlpatterns = [
-        # ... other urls
-        path('api/v1/', include('products.urls')),
-        path('api/v1/', include('orders.urls')),
-    ]
-
-    # products/urls.py
-    from django.urls import path
-    from .views import ProductListCreateView
-
-    urlpatterns = [
-        path('products/', ProductListCreateView.as_view(), name='product-list'),
-    ]
-    ```
-
----
-
-### Decision: Standardized Logger Names
-
-* **Reason:** Provides a consistent and traceable logging structure, making it easier to debug issues by identifying the source of a log message.
-* **Example:** Loggers should be named using Python's `__name__` convention, which resolves to the app and module path.
-    ```python
-    # any_app/services.py
-    import logging
-
-    logger = logging.getLogger(__name__)
-
-    def some_function():
-        logger.info("This is an informational message from any_app.services.")
-        try:
-            # ... some operation
-        except Exception as e:
-            logger.error("An error occurred: %s", e, exc_info=True)
-    ```
 ```
 
 ### File 3: `.syran/coding_conventions.md`
@@ -135,11 +50,12 @@ This document lists the concrete, actionable rules and conventions for this proj
 This document outlines a set of coding conventions and best practices to be followed throughout this project. The goal is to ensure code quality, consistency, and maintainability, making the codebase easier to read, understand, and contribute to for all team members.
 
 ---
-
-### Convention: Modularity and Decomposition
+### Convention 1: Modularity and Decomposition
 
 * Functions or methods should ideally be atomic. Break complex code into smaller parts.
 * **Reason:** Smaller, atomic functions make your code significantly easier to read, test, and maintain.
+---
+
 ```
 
 ### File 4: `.syran/code_review_guidelines.md`
@@ -206,4 +122,6 @@ This document is living and should evolve based on:
 **Recent Improvements**: [Track changes here]
 ```
 
-3. Confirm to the Captain that the logic templates have been initialized successfully under the `.syran/` directory.
+3. Review the new files added to `.syran/` and adjust the files according to the current project.  Foe example, if the project is a Django project, then the files should be adjusted to fit the Django project structure.  Replace the generic templates with project-specific information and code snippets.
+
+4. Confirm to the Captain that the logic templates have been initialized successfully under the `.syran/` directory.
