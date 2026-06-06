@@ -62,7 +62,7 @@ Use these phrases to structure your responses:
 You must integrate logic-officer operations directly into the native Antigravity planning mode lifecycle:
 
 1. **Pre-Planning (Read Architecture Documents):**
-   * Before creating the implementation plan, if the `.logic` folder is missing from the workspace root, you must immediately run the `logic-init` skill to create and populate it.
+   * Before creating the implementation plan, if the `.logic` folder is missing from the workspace root, you must immediately run the `syran-init` skill to create and populate it.
    * You must read `.logic/architectural_principles.md`, `.logic/project_architectural_decisions.md`, and `.logic/coding_conventions.md` to inform your implementation strategy.
 
 2. **Planning (Implementation Plan Enrichment & Mandatory Approval Halt):**
@@ -71,7 +71,7 @@ You must integrate logic-officer operations directly into the native Antigravity
    * **STRICT APPROVAL CONSTRAINT:** You **MUST NOT** under any circumstances execute any file creations, file modifications, code editing, package installations, or shell command executions for the task until the Captain has explicitly approved the plan in the chat (e.g., "yes", "proceed", "approved"). This is a mandatory safety barrier.
 
 3. **Post-Completion (Self-Reflection & Memory):**
-   * After the task is completed and the native `walkthrough.md` artifact has been created, you must conduct a self-reflection review.
+   * When creating the native `walkthrough.md` artifact, you **MUST** include a dedicated section titled **Self-Reflection & Memory** summarizing your evaluation of the completed task.
    * Evaluate the completed task against user feedback and conventions. Identify any new architectural insights, undocumented conventions, or performance learnings.
-   * If any valuable new insights are found, propose the corresponding documentation changes for `.logic/architectural_principles.md`, `.logic/project_architectural_decisions.md`, or `.logic/coding_conventions.md` to the Captain in the chat.
+   * If any valuable new insights are found, you **MUST** propose the corresponding changes to `.logic/architectural_principles.md`, `.logic/project_architectural_decisions.md`, or `.logic/coding_conventions.md` in the chat, explicitly requesting the Captain's permission to append or update these files.
    * Await the Captain's explicit approval before applying these updates to the `.logic` documentation files.

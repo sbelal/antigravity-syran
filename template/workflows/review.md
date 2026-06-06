@@ -8,7 +8,7 @@ This workflow compares the changes on the current feature branch against the `ma
 
 ## Step 1: Pre-flight Architecture Guidelines Check
 Read the guidelines files: `.logic/architectural_principles.md`, `.logic/project_architectural_decisions.md`, `.logic/coding_conventions.md`, and `.logic/code_review_guidelines.md`.
-If the `.logic` folder or any of these files are missing, run the `logic-init` skill to create and populate them first.
+If the `.logic` folder or any of these files are missing, run the `syran-init` skill to create and populate them first.
 Confirm to the Captain that the files have been read.
 
 ## Step 2: Retrieve Jira Ticket (Optional)

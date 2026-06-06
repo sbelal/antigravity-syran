@@ -1,9 +1,9 @@
 ---
-name: logic-init
+name: syran-init
 description: "Initialize the logic officer workspace by creating the `.logic/` folder and copying the default architectural principles, decisions, coding conventions, and review guidelines templates. ACTIVATE this skill when the `.logic/` directory is missing or when the user requests logic initialization."
 ---
 
-# Logic-Init Skill
+# Syran-Init Skill
 
 This skill guides the agent in initializing the logic-officer workspace configuration files under the `.logic/` directory.
 
