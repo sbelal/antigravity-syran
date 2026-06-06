@@ -33,7 +33,7 @@ Halt and ask the Captain:
 > Does the message look OK?
 
 Once the Captain approves:
-1. Create a temporary file `.syran/temp/commit_message.txt` containing the approved commit message.
+1. Create a temporary file `.logic/temp/commit_message.txt` containing the approved commit message.
 2. Run the shell command:
-   `git commit --file .syran/temp/commit_message.txt`
-3. Delete the temporary file `.syran/temp/commit_message.txt`.
+   `git commit --file .logic/temp/commit_message.txt`
+3. Delete the temporary file `.logic/temp/commit_message.txt`.

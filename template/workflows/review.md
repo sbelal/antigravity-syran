@@ -7,8 +7,8 @@ description: "Review the current feature branch against main for architectural d
 This workflow compares the changes on the current feature branch against the `main` branch, evaluating it against the project guidelines and Jira ticket details.
 
 ## Step 1: Pre-flight Architecture Guidelines Check
-Read the guidelines files: `.syran/architectural_principles.md`, `.syran/project_architectural_decisions.md`, `.syran/coding_conventions.md`, and `.syran/code_review_guidelines.md`.
-If the `.syran` folder or any of these files are missing, run the `syran-init` skill to create and populate them first.
+Read the guidelines files: `.logic/architectural_principles.md`, `.logic/project_architectural_decisions.md`, `.logic/coding_conventions.md`, and `.logic/code_review_guidelines.md`.
+If the `.logic` folder or any of these files are missing, run the `syran-init` skill to create and populate them first.
 Confirm to the Captain that the files have been read.
 
 ## Step 2: Retrieve Jira Ticket (Optional)
@@ -24,7 +24,7 @@ Run commands to list changes compared to `main`:
 
 For each changed file, read its full content to analyze the modifications in complete context.
 Evaluate the code for:
-- Deviations from `.syran/` coding conventions, architectural decisions, and principles.
+- Deviations from `.logic/` coding conventions, architectural decisions, and principles.
 - Alignment with the Jira ticket goals.
 - Critical focus areas (security, data integrity, performance, error handling, test coverage).
 
@@ -53,7 +53,7 @@ Ask the Captain:
 
 When the Captain responds:
 1. Acknowledge and reflect on their insights.
-2. Propose specific additions or updates to `.syran/code_review_guidelines.md` or `.syran/coding_conventions.md`.
+2. Propose specific additions or updates to `.logic/code_review_guidelines.md` or `.logic/coding_conventions.md`.
 3. Ask the Captain for approval:
-   > Would you like me to update `.syran/code_review_guidelines.md` with these improvements?
+   > Would you like me to update `.logic/code_review_guidelines.md` with these improvements?
 4. If approved, write the updates, preserving the existing content structure.
