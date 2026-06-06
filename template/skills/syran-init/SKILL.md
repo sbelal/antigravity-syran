@@ -1,18 +1,18 @@
 ---
 name: syran-init
-description: "Initialize the logic officer workspace by creating the `.logic/` folder and copying the default architectural principles, decisions, coding conventions, and review guidelines templates. ACTIVATE this skill when the `.logic/` directory is missing or when the user requests logic initialization."
+description: "Initialize the logic officer workspace by creating the `.syran/` folder and copying the default architectural principles, decisions, coding conventions, and review guidelines templates. ACTIVATE this skill when the `.syran/` directory is missing or when the user requests logic initialization."
 ---
 
 # Syran-Init Skill
 
-This skill guides the agent in initializing the logic-officer workspace configuration files under the `.logic/` directory.
+This skill guides the agent in initializing the logic-officer workspace configuration files under the `.syran/` directory.
 
 ## Execution Workflow
 
-1. Create a directory named `.logic/` at the root of the workspace if it does not already exist.
-2. Create and write the following four files inside `.logic/` with their respective templates:
-
-### File 1: `.logic/architectural_principles.md`
+1. Create a directory named `.syran/` at the root of the workspace if it does not already exist.
+2. Create and write the following four files inside `.syran/` with their respective templates:
+   
+### File 1: `.syran/architectural_principles.md`
 ```markdown
 # 🏛️ Architectural Guiding Principles
 
@@ -59,7 +59,7 @@ This document outlines the high-level architectural principles for this project.
     * When using Django Rest Framework, explicitly define serializer fields (`fields = ['id', 'name']`) instead of relying on `fields = '__all__'` to avoid accidentally exposing sensitive data.
 ```
 
-### File 2: `.logic/project_architectural_decisions.md`
+### File 2: `.syran/project_architectural_decisions.md`
 ```markdown
 # ⚙️ Project-Specific Decisions
 
@@ -128,7 +128,7 @@ This document lists the concrete, actionable rules and conventions for this proj
     ```
 ```
 
-### File 3: `.logic/coding_conventions.md`
+### File 3: `.syran/coding_conventions.md`
 ```markdown
 # ⚙️ Project Coding Conventions
 
@@ -142,7 +142,7 @@ This document outlines a set of coding conventions and best practices to be foll
 * **Reason:** Smaller, atomic functions make your code significantly easier to read, test, and maintain.
 ```
 
-### File 4: `.logic/code_review_guidelines.md`
+### File 4: `.syran/code_review_guidelines.md`
 ```markdown
 # Code Review Guidelines
 
@@ -206,4 +206,4 @@ This document is living and should evolve based on:
 **Recent Improvements**: [Track changes here]
 ```
 
-3. Confirm to the Captain that the logic templates have been initialized successfully under the `.logic/` directory.
+3. Confirm to the Captain that the logic templates have been initialized successfully under the `.syran/` directory.

@@ -15,12 +15,12 @@ Syran extends the Google Antigravity agentic development platform, injecting a d
 ### **The Self-Improving Memory Loop**
 For any complex engineering task, Syran integrates directly with the native Antigravity planning lifecycle:
 
-1. **Pre-Planning (Read Architecture Documents):** Reads the project's architectural guidelines in the `.logic/` directory. If the folder is missing, Syran runs her native `syran-init` skill to initialize it.
+1. **Pre-Planning (Read Architecture Documents):** Reads the project's architectural guidelines in the `.syran/` directory. If the folder is missing, Syran runs her native `syran-init` skill to initialize it.
 2. **Understand & Strategize:** Explores the codebase and performs a logical validation of the request, raising an **Illogical Command Alert** if she detects contradictions, bad UX decisions, or potential data loss risk.
 3. **Provide Detailed Plan (Halt & Await Approval):** Generates an `implementation_plan.md` artifact in the brain, enhanced with a dedicated **Architectural Alignment** section. Syran halts execution completely until the Captain explicitly approves the plan in the chat.
 4. **Implement & Verify:** Creates a `task.md` checkpoint checklist to track code modifications, writes the implementation, and runs tests/linters.
 5. **Confirm Task Completion:** Outputs a `walkthrough.md` verification report and halts to request confirmation from the Captain.
-6. **Self-Reflection & Documentation:** Conducts a final review, identifying new insights or undocumented patterns, and proposes updates to refine the guidelines inside the `.logic/` folder.
+6. **Self-Reflection & Documentation:** Conducts a final review, identifying new insights or undocumented patterns, and proposes updates to refine the guidelines inside the `.syran/` folder.
 
 ---
 
@@ -39,7 +39,7 @@ Syran is governed by **pure logic** and is inspired in spirit by the classic sci
 ## **Features**
 
 *   🛡️ **Logical Integrity & Critiques:** Active shielding against bad design, anti-patterns, and suboptimal codebase choices.
-*   📂 **Syran-Init Skill:** Instantly scaffolds `.logic/` guidelines files with core templates for principles, conventions, decisions, and code reviews.
+*   📂 **Syran-Init Skill:** Instantly scaffolds `.syran/` guidelines files with core templates for principles, conventions, decisions, and code reviews.
 *   🔍 **Repo-Onboard Skill:** Performs deep structural scans of repositories and creates comprehensive onboarding markdown reports.
 *   🤖 **Custom Syran Subagent:** Declares a standalone subagent configuration template for delegating reasoning tasks in multi-agent workflows.
 *   📦 **Zero-Dependency Installer:** An interactive installer/uninstaller supporting local workspace-level and global multi-repo distribution.
@@ -92,7 +92,7 @@ Syran registers the following native slash command workflows in Antigravity:
 | :--- | :--- |
 | `/commit` | Checks staged changes, generates a commit message formatted as `[branch-name] Description`, requests approval, and performs the commit. |
 | `/pr` | Compares the current branch against `main`, generates a detailed pull request description, and saves it to `<branch_name>_pr_message.md`. |
-| `/review` | Analyzes code changes on the branch, checks guidelines inside `.logic/`, writes `<branch_name>_review.md`, and prompts for feedback to refine coding conventions. |
+| `/review` | Analyzes code changes on the branch, checks guidelines inside `.syran/`, writes `<branch_name>_review.md`, and prompts for feedback to refine coding conventions. |
 | `/onboard` | Executes the `repo-onboard` skill to scan the workspace and generate a `<repo_name>_onboarding.md` guide. |
 
 ---
