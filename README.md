@@ -61,7 +61,7 @@ Syran comes with a zero-dependency installer that can be run instantly via `npx`
 npx git+https://github.com/sbelal/antigravity-syran.git
 ```
 
-When prompt, select an option from the menu:
+When prompted, select an option from the menu:
 
 ```text
 ===========================================
@@ -71,14 +71,17 @@ When prompt, select an option from the menu:
 2. Install Syran Globally (all workspaces)
 3. Uninstall Syran Locally
 4. Uninstall Syran Globally
-5. Exit
+5. Uninstall Syran both Locally and Globally (Full Removal)
+6. Exit
 ===========================================
-Select an option [1-5]:
+Select an option [1-6]:
 ```
 
 *   **Local Installation:** Deploys the plugin inside `.agents/plugins/syran` under the current directory.
 *   **Global Installation:** Deploys the plugin globally under `C:\Users\sbela\.gemini\config\plugins\syran`.
-*   **Local Uninstaller:** Removes the plugin and recursively cleans up the parent directories (`.agents/plugins` and `.agents`) if they are empty.
+*   **Local Uninstaller:** Removes the local plugin and recursively cleans up the parent directories (`.agents/plugins` and `.agents`) if they are empty.
+*   **Global Uninstaller:** Removes the global plugin.
+*   **Full Removal:** Removes both local and global installations.
 
 *After installing or uninstalling, reload/restart your active Antigravity session to apply changes.*
 

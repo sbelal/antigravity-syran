@@ -175,10 +175,11 @@ function showMenu() {
   console.log('2. Install Syran Globally (all workspaces)');
   console.log('3. Uninstall Syran Locally');
   console.log('4. Uninstall Syran Globally');
-  console.log('5. Exit');
+  console.log('5. Uninstall Syran both Locally and Globally (Full Removal)');
+  console.log('6. Exit');
   console.log('===========================================');
   
-  rl.question('Select an option [1-5]: ', (answer) => {
+  rl.question('Select an option [1-6]: ', (answer) => {
     const choice = answer.trim();
     switch (choice) {
       case '1':
@@ -206,13 +207,23 @@ function showMenu() {
         rl.close();
         break;
       case '5':
+        console.log('Starting full removal of Syran plugin (both local and global)...');
+        uninstall(localTarget, localWorkflowsTarget, 'locally');
+        if (!globalTarget || !globalWorkflowsTarget) {
+          console.error('\x1b[31mError: Could not resolve home directory paths for global uninstallation.\x1b[0m');
+        } else {
+          uninstall(globalTarget, globalWorkflowsTarget, 'globally');
+        }
+        rl.close();
+        break;
+      case '6':
       case 'exit':
       case 'quit':
         console.log('Exiting...');
         rl.close();
         break;
       default:
-        console.log('\x1b[31mInvalid option. Please choose a number between 1 and 5.\x1b[0m');
+        console.log('\x1b[31mInvalid option. Please choose a number between 1 and 6.\x1b[0m');
         showMenu();
         break;
     }
