@@ -21,7 +21,7 @@ Before drafting the implementation plan:
 
 ## Step 3: Implementation Plan & Alignment
 Create or update the `implementation_plan.md` artifact.
-In the **Goal Description** section, you **must** add a dedicated **Architectural Alignment** subsection. Detail how the proposed changes adhere to the guidelines inside `.syran/`. If any guidelines conflict, explain the resolution.
+In the **Goal Description** section, you **must** add a dedicated **Architectural Alignment** subsection. Detail how the proposed changes adhere to the guidelines inside `.syran/`, explicitly quoting the corresponding principle number or decision number (e.g., *"Principle 1: Modular Plugin Architecture"* or *"Decision 2: Global Config Paths"*). If any guidelines conflict, explain the resolution.
 
 ## Step 4: Mandatory Approval Halt
 Halt all execution. You **must not** make any file changes, modifications, or run installation commands until the Captain explicitly approves the plan in the chat (e.g., *"yes"*, *"proceed"*, *"approved"*).

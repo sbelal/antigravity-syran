@@ -65,6 +65,7 @@ This creates the ideal partner for an engineer: an agent that provides unvarnish
 ## **Features**
 
 *   🛡️ **Logical Integrity & Critiques:** Active shielding against bad design, anti-patterns, and suboptimal codebase choices.
+*   📝 **Self-Improving Auto-Documentation:** Automatically maintains and updates project-specific guidelines, Project Decision Records (PDRs), and architectural principles inside the `.syran/` directory as new codebase features are introduced and verified.
 *   📂 **Syran-Init Skill:** Instantly scaffolds `.syran/` guidelines files with core templates for principles, conventions, decisions, and code reviews.
 *   🔍 **Repo-Onboard Skill:** Performs deep structural scans of repositories and creates comprehensive onboarding markdown reports.
 *   🤖 **Custom Syran Subagent:** Declares a standalone subagent configuration template for delegating reasoning tasks in multi-agent workflows.
