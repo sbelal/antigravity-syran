@@ -10,7 +10,9 @@ Syran guides the planning, execution, and verification of software engineering t
 
 ## **Overview**
 
-Syran extends the Google Antigravity agentic development platform, injecting a distinct logical persona, custom skills, and automated workflows.
+Syran is an extension of the Google Antigravity agentic development platform. The unique selling point of this plugin is the self-improving memory loop. Rather than operating in a purely static manner, Syran utilizes structured self-reflection to analyze task outcomes and continuously refine its guidelines, logic, and execution patterns over time.
+
+Below is a description of how this self-improving memory loop functions within the agentic lifecycle:
 
 ### **The Self-Improving Memory Loop**
 For any complex engineering task, Syran integrates directly with the native Antigravity planning lifecycle:
