@@ -8,6 +8,22 @@ Syran guides the planning, execution, and verification of software engineering t
 
 ---
 
+## **Table of Contents**
+
+- [Overview](#overview)
+  - [The Self-Improving Memory Loop](#the-self-improving-memory-loop)
+- [Prerequisites](#prerequisites)
+- [Setup & Installation](#setup--installation)
+- [The Logic Officer Persona](#the-logic-officer-persona)
+  - [Why a Persona?](#why-a-persona)
+  - [Inspiration and Function](#inspiration-and-function)
+  - [Directives for Logical Integrity](#directives-for-logical-integrity)
+- [Features](#features)
+- [Usage & Custom Commands](#usage--custom-commands)
+- [Contributing](#contributing)
+
+---
+
 ## **Overview**
 
 Syran is an extension of the Google Antigravity agentic development platform. The unique selling point of this plugin is the self-improving memory loop. Rather than operating in a purely static manner, Syran utilizes structured self-reflection to analyze task outcomes and continuously refine its guidelines, logic, and execution patterns over time.
@@ -23,6 +39,47 @@ For any complex engineering task, Syran integrates directly with the native Anti
 4. **Implement & Verify:** Creates a `task.md` checkpoint checklist to track code modifications, writes the implementation, and runs tests/linters.
 5. **Confirm Task Completion:** Outputs a `walkthrough.md` verification report and halts to request confirmation from the Captain.
 6. **Self-Reflection & Documentation:** Conducts a final review, identifying new insights or undocumented patterns, and proposes updates to refine the guidelines inside the `.syran/` folder.
+
+---
+
+## **Prerequisites**
+
+To use Syran, you must have the **Google Antigravity** platform installed.
+
+---
+
+## **Setup & Installation**
+
+Syran comes with a zero-dependency installer that can be run instantly via `npx` (from a local directory or cloned Git URL) without any prior setup:
+
+```bash
+# Run the interactive installer
+npx git+https://github.com/sbelal/antigravity-syran.git
+```
+
+When prompted, select an option from the menu:
+
+```text
+===========================================
+    Syran Antigravity 2.0 Plugin Tool      
+===========================================
+1. Install Syran Locally (current workspace)
+2. Install Syran Globally (all workspaces)
+3. Uninstall Syran Locally
+4. Uninstall Syran Globally
+5. Uninstall Syran both Locally and Globally (Full Removal)
+6. Exit
+===========================================
+Select an option [1-6]:
+```
+
+*   **Local Installation:** Deploys the plugin inside `.agents/plugins/syran` under the current directory.
+*   **Global Installation:** Deploys the plugin globally under `C:\Users\sbela\.gemini\config\plugins\syran`.
+*   **Local Uninstaller:** Removes the local plugin and recursively cleans up the parent directories (`.agents/plugins` and `.agents`) if they are empty.
+*   **Global Uninstaller:** Removes the global plugin.
+*   **Full Removal:** Removes both local and global installations.
+
+*After installing or uninstalling, reload/restart your active Antigravity session to apply changes.*
 
 ---
 
@@ -72,47 +129,6 @@ This creates the ideal partner for an engineer: an agent that provides unvarnish
 *   🔍 **Repo-Onboard Skill:** Performs deep structural scans of repositories and creates comprehensive onboarding markdown reports.
 *   🤖 **Custom Syran Subagent:** Declares a standalone subagent configuration template for delegating reasoning tasks in multi-agent workflows.
 *   📦 **Zero-Dependency Installer:** An interactive installer/uninstaller supporting local workspace-level and global multi-repo distribution.
-
----
-
-## **Prerequisites**
-
-To use Syran, you must have the **Google Antigravity** platform installed.
-
----
-
-## **Setup & Installation**
-
-Syran comes with a zero-dependency installer that can be run instantly via `npx` (from a local directory or cloned Git URL) without any prior setup:
-
-```bash
-# Run the interactive installer
-npx git+https://github.com/sbelal/antigravity-syran.git
-```
-
-When prompted, select an option from the menu:
-
-```text
-===========================================
-    Syran Antigravity 2.0 Plugin Tool      
-===========================================
-1. Install Syran Locally (current workspace)
-2. Install Syran Globally (all workspaces)
-3. Uninstall Syran Locally
-4. Uninstall Syran Globally
-5. Uninstall Syran both Locally and Globally (Full Removal)
-6. Exit
-===========================================
-Select an option [1-6]:
-```
-
-*   **Local Installation:** Deploys the plugin inside `.agents/plugins/syran` under the current directory.
-*   **Global Installation:** Deploys the plugin globally under `C:\Users\sbela\.gemini\config\plugins\syran`.
-*   **Local Uninstaller:** Removes the local plugin and recursively cleans up the parent directories (`.agents/plugins` and `.agents`) if they are empty.
-*   **Global Uninstaller:** Removes the global plugin.
-*   **Full Removal:** Removes both local and global installations.
-
-*After installing or uninstalling, reload/restart your active Antigravity session to apply changes.*
 
 ---
 
